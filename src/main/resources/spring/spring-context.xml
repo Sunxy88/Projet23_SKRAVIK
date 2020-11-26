@@ -13,9 +13,9 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!-- 加载外部属性配置文件 -->
+    <!-- Load config file -->
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:config/jdbc.properties" />
+        <property name="locations" value="classpath:DBconfig/jdbc.properties" />
     </bean>
 
     <!-- Config datasource -->
