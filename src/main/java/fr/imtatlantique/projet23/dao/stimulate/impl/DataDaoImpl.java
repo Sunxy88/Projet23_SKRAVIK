@@ -1,7 +1,5 @@
 package fr.imtatlantique.projet23.dao.stimulate.impl;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVReaderHeaderAware;
 import com.opencsv.CSVReaderHeaderAwareBuilder;
 import fr.imtatlantique.projet23.dao.stimulate.DataDao;
@@ -19,7 +17,7 @@ import java.util.*;
 @Component
 public class DataDaoImpl implements DataDao {
 
-    private String dataPath = this.getClass().getClassLoader().getResource("stimulateData/dataset.csv").getPath();
+    private String dataPath = this.getClass().getClassLoader().getResource("simulatedData/dataset.csv").getPath();
     private File csv = new File(dataPath);
 
     /**
@@ -74,7 +72,6 @@ public class DataDaoImpl implements DataDao {
                     e.printStackTrace();
                 }
 
-//                Arrays.stream(curLine).forEach(System.out::print);
                 System.out.println();
             }
         } catch (Exception e) {
