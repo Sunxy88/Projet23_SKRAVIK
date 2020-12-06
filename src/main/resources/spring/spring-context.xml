@@ -3,42 +3,61 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <context:component-scan base-package="fr.imtatlantique.projet23.*">
+    <context:component-scan base-package="fr.imtatlantique.projet23.web.*">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <!-- Load config file -->
-    <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:DBconfig/jdbc.properties" />
-    </bean>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="classpath:config/jdbc.properties"
+          p:fileEncoding="utf-8"/>
 
     <!-- Config datasource -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="12345678"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/skravik"/>
+    </bean>
 
     <!-- Config MyBatis-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mapper/DataMapper.xml</value>
+            </list>
+        </property>
+    </bean>
 
     <!-- Config the scan for Mapper mapping -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="basePackage" value="fr.imtatlantique.projet23.web.dao"/>
+    </bean>
 
     <!-- Transaction manager -->
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="dataSource" />-->
-<!--    </bean>-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 
-<!--    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">-->
-<!--        <tx:attributes>-->
-<!--            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="java.lang.Exception"/>-->
-<!--            <tx:method name="query*" read-only="true"/>-->
-<!--            <tx:method name="get*" read-only="true"/>-->
-<!--        </tx:attributes>-->
-<!--    </tx:advice>-->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT" rollback-for="java.lang.Exception"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 
-<!--    <aop:config>-->
-<!--        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* fr.imtatlantique.projet23..*ServiceImpl.*(..))"/>-->
-<!--    </aop:config>-->
+    <aop:config>
+        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* fr.imtatlantique.projet23..*ServiceImpl.*(..))"/>
+    </aop:config>
 
 </beans>

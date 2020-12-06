@@ -1,0 +1,63 @@
+.bmenu{
+  display: block;
+  position: relative;
+  min-width: 290px;
+  width: 300px;
+  height: 100%;
+  border-right: solid;
+  border-color: rgba(0, 22, 22, 0.4);
+  background: transparent;
+  left: -12px;
+}
+.bmenu li{
+    font-size: 20px;
+    display: block;
+  line-height: 0.8em;
+}
+.bmenu li section{
+  display: block;
+  text-shadow: 0px 0px 2px white;
+  color: white;
+  padding: 5px 20px;
+  margin: 2px;
+  background: rgba(0,0,0,0.7);
+  letter-spacing: 1px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.bmenu:hover li section{
+  text-shadow: 0px 0px 10px gray;
+  color: transparent;
+  background: rgba(0,0,0,0.2);
+}
+.bmenu li section:hover{
+  background: rgba(0,0,0,1.0);
+  text-shadow: 0px 0px 0px #DCDCDC;
+}
+.graph_profil{
+  display: block; 
+  position: relative;
+  cursor: pointer;
+  margin-left: 25px;
+  font-size: 12px;
+  margin-bottom: -10px;
+  top: -15px;
+}
+#button1{ 
+  display: block;
+  position: relative;
+  left: 179px;
+}
+#button2{ 
+  display: block;
+  position: relative;
+  left: 179px;
+}
+#button3{ 
+  display: block;
+  position: relative;
+  left: 179px;
+}

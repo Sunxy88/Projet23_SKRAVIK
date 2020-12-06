@@ -1,6 +1,6 @@
 package fr.imtatlantique.projet23.dao.stimulate.impl;
 
-import fr.imtatlantique.projet23.dao.stimulate.DataDao;
+import fr.imtatlantique.projet23.web.dao.DataDao;
 import fr.imtatlantique.projet23.entity.Data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +26,4 @@ public class DataDaoImplTest{
     @Test
     public void pureTest() {
     }
-
-
 }

@@ -1,0 +1,27 @@
+#graph_map{
+    /*border: solid red;*/
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    height: 80vh;
+}
+
+#graphdiv{
+    
+    width: 35vw; 
+    height: auto;
+    /*border: solid blue;*/
+    display: inline-block;
+}
+
+#mapdiv{
+    width: 35vw; 
+    height: auto;
+    /*border: solid green;*/
+    display: inline-block;
+}
+
+#myChart{
+    background-color: white;
+    /*border: solid pink;*/
+}

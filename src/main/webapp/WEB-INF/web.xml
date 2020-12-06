@@ -16,12 +16,9 @@
     </listener>
     
     <listener>
-        <listener-class>fr.imtatlantique.projet23.listener.SystemStartListener</listener-class>
+        <listener-class>fr.imtatlantique.projet23.web.listener.SystemStartListener</listener-class>
     </listener>
 
-    <!-- 字符编码过滤器:
-    	只负责解决POST请求乱码问题.
-     -->
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

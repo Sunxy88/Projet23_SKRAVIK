@@ -13,7 +13,11 @@
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/style4.css" />
-
+    <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/map_graph.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="${APP_PATH}/js/chart.js/dist/Chart.js"></script>
 </head>
 <body style="background-image: url(${APP_PATH}/images/pattern.png), url(${APP_PATH}/images/rade.jpg);" class="gauche">
 <div class="container">
@@ -43,15 +47,17 @@
                 </li>
                 <li>
                     <section>
-                        <h4>Historique des missions:</h4><FORM>
-                        <SELECT name="nom" size="1">
-                            <OPTION id="option1">mission1</OPTION>
-                            <OPTION id="option2">mission2</OPTION>
-                            <OPTION id="option3">mission3</OPTION>
-                            <OPTION id="option4">mission4</OPTION>
-                            <OPTION id="option5">mission5</OPTION>
-                        </SELECT>
-                    </FORM>
+                        <h4>Historique des missions:</h4>
+                        <form method="POST" action="${APP_PATH}/data/doGetMission.do">
+                            <select name="missionId" size="1">
+                                <option id="1" value="1">mission1</option>
+                                <option id="2" value="2">mission2</option>
+                                <option id="3" value="3">mission3</option>
+                                <option id="4" value="4">mission4</option>
+                                <option id="5" value="5">mission5</option>
+                            </select>
+                            <input type="submit" value="Rchercher">
+                        </form>
 
                         <p>Choix des données:</p>
                         <div>
@@ -81,15 +87,61 @@
         </div>
 
         <div id="corps">
-            <div id="titre">
-                <h1 id="">Données océanographiques<span class="right"> Skravik</span></h1>
-            </div>
+            <div id="graph_map">
+                <div id="graphdiv">
+                    <canvas id="myChart" width="33vw" height="20vh"></canvas>
+                    <script type="text/javascript">
+                        var lat = ${latitudes}
+                        var lon = ${longitudes}
+                        var dataforchart = []
+                        for(let i = 0; i < lat.length; i++){
+                            if(lon[i]!=0){
+                                dataforchart[i] = {
+                                    x: lat[i],
+                                    y: lon[i]
+                                }
+                            }
+                        }
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var scatterChart = new Chart(ctx, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    label: 'Scatter Dataset',
+                                    data: dataforchart
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        type: 'linear',
+                                        position: 'bottom'
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+                <div id="mapdiv">
+                    <script type="text/javascript">
+                        var lat = ${latitudes}
+                        var lon = ${longitudes}
+                        var mymap = L.map('mapdiv').setView([lat[0], lon[0]], 12);
 
-            <div id="content3">
-                <p> text pour afficher les graphs </p>
+                        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(mymap);
+                        for (let i = 0; i < lat.length; i++) {
+                            var circle = L.circle([lat[i], lon[i]], {
+                                color: 'red',
+                                fillColor: '#f03',
+                                fillOpacity: 0.5,
+                                radius: 50
+                            }).addTo(mymap).bindPopup("Lattitude: "+ (Math.round(lat[i] * 100000) / 100000).toString() +"  /  Longitude: "+ (Math.round(lon[i] * 100000) / 100000).toString() );
+                        }
+                    </script>
+                </div>
             </div>
-
-        </div>
 
     </div>
     <div class="footer">
@@ -97,8 +149,7 @@
     </div>
 
 </div>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js">
-</script>
 </body>
 </html>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"/>
 
