@@ -22,4 +22,9 @@ public class DataServiceImpl implements DataService {
         map.put("missionName", missionName);
         return dataMapper.getDataByMissionName(map);
     }
+
+    @Override
+    public List<String> getAllMissionNames() {
+        return dataMapper.getAllMissionNames();
+    }
 }

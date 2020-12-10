@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DataService {
     List<Data> getDataByMissionName(String missionName);
+
+    List<String> getAllMissionNames();
 }

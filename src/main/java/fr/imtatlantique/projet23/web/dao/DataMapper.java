@@ -97,4 +97,6 @@ public interface DataMapper {
     int updateByPrimaryKey(Data record);
 
     List<Data> getDataByMissionName(Map map);
+
+    List<String> getAllMissionNames();
 }

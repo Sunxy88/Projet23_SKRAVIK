@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -50,11 +51,14 @@
                         <h4>Historique des missions:</h4>
                         <form method="POST" action="${APP_PATH}/data/doGetMission.do">
                             <select name="missionId" size="1">
-                                <option id="1" value="1">mission1</option>
-                                <option id="2" value="2">mission2</option>
-                                <option id="3" value="3">mission3</option>
-                                <option id="4" value="4">mission4</option>
-                                <option id="5" value="5">mission5</option>
+                                <c:forEach items="${sessionScope.missionNames}" var="mission" varStatus="i">
+                                    <option id="<${i.count}" value="${i.count}">${mission}</option>
+                                </c:forEach>
+<%--                                <option id="1" value="1">mission1</option>--%>
+<%--                                <option id="2" value="2">mission2</option>--%>
+<%--                                <option id="3" value="3">mission3</option>--%>
+<%--                                <option id="4" value="4">mission4</option>--%>
+<%--                                <option id="5" value="5">mission5</option>--%>
                             </select>
                             <input type="submit" value="Rchercher">
                         </form>

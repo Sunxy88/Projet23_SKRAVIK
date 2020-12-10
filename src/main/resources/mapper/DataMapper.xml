@@ -543,4 +543,9 @@
       missionName like concat("%", #{missionName}, "%")
     </where>
   </select>
+
+  <select id="getAllMissionNames" resultType="java.lang.String">
+    select distinct missionName
+    from data_table
+  </select>
 </mapper>
