@@ -18,17 +18,20 @@
     <link rel="stylesheet" type="text/css" href="${APP_PATH}/css/map_graph.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    <script src="${APP_PATH}/js/chart.js/dist/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 </head>
-<body style="background-image: url(${APP_PATH}/images/pattern.png), url(${APP_PATH}/images/rade.jpg);" class="gauche">
+<%--<body style="background-image: url(${APP_PATH}/images/pattern.png), url(${APP_PATH}/images/rade.jpg);" class="gauche">--%>
+<body style="background-color:#d4d4d4 " class="gauche">
 <div class="container">
     <div class="header">
         <a href="https://tag.bzh/projet/tag29/flotte-oceanographique-skravik">
-            <strong>&laquo; Retour vers SKRAVIK</strong>
+            <img src="${APP_PATH}/images/logo.png" width="50%"/>
+<%--            <strong>&laquo; Retour vers SKRAVIK</strong>--%>
         </a>
         <span class="right">
                     <a href="${APP_PATH}/contact.htm" target="_blank"><img src="${APP_PATH}/images/email.png" alt="" id="image1" /></a>
-                    <a href="https://www.windy.com/?48.110,-1.674,5" target="_blank"><img src="${APP_PATH}/WEB-INF/images/météo.png" alt="" id="image2"/>
+                    <a href="https://www.windy.com/?48.110,-1.674,5" target="_blank"><img src="${APP_PATH}/images/météo.png" alt="" id="image2"/>
                     </a>
                   <a href="connexion.php"><img src="${APP_PATH}/images/user.png" alt="" id="image3"/> <!--Link should be changed ? -->
                     </a>
@@ -40,11 +43,10 @@
         <div id="bmenu">
             <div class="bmenu">
                 <li>
-                    <section>
-                        <h4>Recherche sur le site:</h4>
-                        <input type="search" id="site-search" name="search1" placeholder="Rechercher sur le site…">
-                        <button id="button1">Rechercher</button><br>
-                    </section>
+<%--                    <section>--%>
+<%--                        <h4>Recherche sur le site:</h4>--%>
+<%--                        <input type="search" id="site-search" name="search1" placeholder="Rechercher sur le site…">--%>
+<%--                    </section>--%>
                 </li>
                 <li>
                     <section>
@@ -54,38 +56,35 @@
                                 <c:forEach items="${sessionScope.missionNames}" var="mission" varStatus="i">
                                     <option id="<${i.count}" value="${i.count}">${mission}</option>
                                 </c:forEach>
-<%--                                <option id="1" value="1">mission1</option>--%>
-<%--                                <option id="2" value="2">mission2</option>--%>
-<%--                                <option id="3" value="3">mission3</option>--%>
-<%--                                <option id="4" value="4">mission4</option>--%>
-<%--                                <option id="5" value="5">mission5</option>--%>
-                            </select>
+                                <br/>
+                            </select><br>
+                            <input type="checkbox" id="airTemp" name="airTemp" value="true" checked="checked"><label id="graph" class="graph_profil">Profil de température</label>
+                            <input type="checkbox" id="salinity" name="salinity" value="true" checked="checked"><label id="graph" class="graph_profil">Profil de salinité</label>
                             <input type="submit" value="Rchercher">
                         </form>
 
-                        <p>Choix des données:</p>
-                        <div>
-                            <input type="checkbox" id="profil1" name="profil1"><label id="graph" class="graph_profil">Profil de température</label>
-                            <input type="checkbox" id="profil2" name="profil2"><label id="graph" class="graph_profil">Profil de salinité</label>
-                            <input type="checkbox" id="profil3" name="profil3"><label id="graph" class="graph_profil">Série temporelles</label>
-                            <input type="checkbox" id="profil4" name="profil4"><label id="graph" class="graph_profil">Carte</label>
-                        </div>
-                        <button id="button2" >Rechercher</button>
+<%--                        <p>Choix des données:</p>--%>
+<%--                        <div>--%>
+<%--                            <input type="checkbox" id="profil1" name="profil1"><label id="graph" class="graph_profil">Profil de température</label>--%>
+<%--                            <input type="checkbox" id="profil2" name="profil2"><label id="graph" class="graph_profil">Profil de salinité</label>--%>
+<%--                            <input type="checkbox" id="profil3" name="profil3"><label id="graph" class="graph_profil">Série temporelles</label>--%>
+<%--                            <input type="checkbox" id="profil4" name="profil4"><label id="graph" class="graph_profil">Carte</label>--%>
+<%--                        </div>--%>
                     </section>
                 </li>
 
-                <li>
-                    <section>
-                        <h4> Visualiser carte des trajets:</h4>
-                        <button id="button3" >Afficher</button>
-                    </section>
-                </li>
+<%--                <li>--%>
+<%--                    <section>--%>
+<%--                        <h4> Visualiser carte des trajets:</h4>--%>
+<%--                        <button id="button3" >Afficher</button>--%>
+<%--                    </section>--%>
+<%--                </li>--%>
 
-                <li>
-                    <section>
-                        <p> </p>
-                    </section>
-                </li>
+<%--                <li>--%>
+<%--                    <section>--%>
+<%--                        <p> </p>--%>
+<%--                    </section>--%>
+<%--                </li>--%>
 
             </div>
         </div>
@@ -93,20 +92,19 @@
         <div id="corps">
             <div id="graph_map">
                 <div id="graphdiv">
-                    <canvas id="myChart" width="33vw" height="20vh"></canvas>
+                    <canvas id="airTempGraph" width="33vw" height="20vh"></canvas>
                     <script type="text/javascript">
-                        var lat = ${latitudes}
-                        var lon = ${longitudes}
+                        var air_temp = ${aitTemperatures}
+                        var dates = ${dates}
                         var dataforchart = []
-                        for(let i = 0; i < lat.length; i++){
-                            if(lon[i]!=0){
-                                dataforchart[i] = {
-                                    x: lat[i],
-                                    y: lon[i]
-                                }
+                        for(let i = 0; i < dates.length; i++){
+                            dataforchart[i] = {
+                                x: moment(dates[i]),
+                                // x: dates[i],
+                                y: air_temp[i]
                             }
                         }
-                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var ctx = document.getElementById('airTempGraph').getContext('2d');
                         var scatterChart = new Chart(ctx, {
                             type: 'scatter',
                             data: {
@@ -116,12 +114,76 @@
                                 }]
                             },
                             options: {
+                                title: {
+                                    text: 'Chart.js Time Scale'
+                                },
                                 scales: {
                                     xAxes: [{
-                                        type: 'linear',
-                                        position: 'bottom'
+                                        type: 'time',
+                                        time : {
+                                            parser : 'YYYY-MM-DD HH:mm:ss',
+                                        },
+                                        position: 'bottom',
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Date'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Air Temperature'
+                                        }
                                     }]
-                                }
+                                },
+                            }
+                        });
+                    </script>
+                    <canvas id="salinityGraph" width="33vw" height="20vh"></canvas>
+                    <script type="text/javascript">
+                        var salinity = ${salinity}
+                        var dates = ${dates}
+                        var dataforchart = []
+                        for(let i = 0; i < dates.length; i++){
+                            dataforchart[i] = {
+                                x: moment(dates[i]),
+                                // x: dates[i],
+                                y: salinity[i]
+                            }
+                        }
+                        var ctx = document.getElementById('salinityGraph').getContext('2d');
+                        var scatterChart = new Chart(ctx, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    label: 'Scatter Dataset',
+                                    data: dataforchart
+                                }]
+                            },
+                            options: {
+                                title: {
+                                    text: 'Chart.js Time Scale'
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'time',
+                                        time : {
+                                            parser : 'YYYY-MM-DD HH:mm:ss',
+                                            //     tooltip: 'YYYY-MM-DD HH:mm:ss'
+                                        },
+                                        position: 'bottom',
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Date'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Salinity'
+                                        }
+                                    }]
+                                },
                             }
                         });
                     </script>
@@ -152,6 +214,7 @@
         <h2> partenaires </h2>
     </div>
 
+</div>
 </div>
 </body>
 </html>

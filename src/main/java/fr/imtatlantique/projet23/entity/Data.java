@@ -1,6 +1,6 @@
 package fr.imtatlantique.projet23.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Data {
     /**
@@ -19,7 +19,7 @@ public class Data {
      *
      * @mbg.generated Sun Dec 06 16:12:51 CST 2020
      */
-    private Date date;
+    private Timestamp date;
 
     /**
      *
@@ -224,7 +224,7 @@ public class Data {
      *
      * @mbg.generated Sun Dec 06 16:12:51 CST 2020
      */
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
@@ -236,7 +236,7 @@ public class Data {
      *
      * @mbg.generated Sun Dec 06 16:12:51 CST 2020
      */
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

@@ -48,7 +48,7 @@ public class DataDaoImpl implements DataDao {
                 Data data = new Data();
 
                 try {
-                    data.setDate(sdf.parse(curLine[0]));
+//                    data.setDate(sdf.parse(curLine[0]));
                     data.setLatitude(curLine[1].length() != 0 ? Double.valueOf(curLine[1]) : null);
                     data.setLongitude(curLine[2].length() != 0 ? Double.valueOf(curLine[2]) : null);
                     data.setVelocity(curLine[3].length() != 0 ? Double.valueOf(curLine[3]) : null);

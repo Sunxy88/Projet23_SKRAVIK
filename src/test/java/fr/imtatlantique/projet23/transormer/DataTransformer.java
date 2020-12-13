@@ -45,6 +45,7 @@ public class DataTransformer {
                 String[] split = line.split(" ");
                 String dateStr = split[0];
                 dateStr = dateStr.replace('T', ' ');
+                dateStr = dateStr + ":00";
                 String insert = String.format(insertStatement, "'" + dateStr + "'", split[1], split[2], split[3], split[4], split[5], split[6], split[7], split[8], split[9], split[10],split[11], split[13], split[14], split[15], split[16], split[17], split[18], split[19], "'mission" + (i + 1) +"'");
                 writer.write(insert + "\n");
             }
