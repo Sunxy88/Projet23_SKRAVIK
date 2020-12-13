@@ -14,17 +14,25 @@
     </context:component-scan>
 
     <!-- Load config file -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="classpath:config/jdbc.properties"
-          p:fileEncoding="utf-8"/>
+    <context:property-placeholder location="classpath:/config/database_connect.properties"/>
 
     <!-- Config datasource -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+<!--        Fill with the corresponding driver of your database-->
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+<!--        Your username of the database-->
         <property name="user" value="root"/>
+<!--        Your password of the database-->
         <property name="password" value="12345678"/>
+<!--        Your url to your database-->
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/skravik"/>
     </bean>
+
+
+    <!--        <property name="driverClass" value='${jdbc.driver}'/>-->
+    <!--        <property name="user" value='${jdbc.user}'/>-->
+    <!--        <property name="password" value='${jdbc.password}'/>-->
+    <!--        <property name="jdbcUrl" value='${jdbc.url}'/>-->
 
     <!-- Config MyBatis-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

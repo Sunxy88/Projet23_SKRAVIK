@@ -21,13 +21,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 </head>
-<%--<body style="background-image: url(${APP_PATH}/images/pattern.png), url(${APP_PATH}/images/rade.jpg);" class="gauche">--%>
 <body style="background-color:#d4d4d4 " class="gauche">
 <div class="container">
     <div class="header">
         <a href="https://tag.bzh/projet/tag29/flotte-oceanographique-skravik">
             <img src="${APP_PATH}/images/logo.png" width="50%"/>
-<%--            <strong>&laquo; Retour vers SKRAVIK</strong>--%>
         </a>
         <span class="right">
                     <a href="${APP_PATH}/contact.htm" target="_blank"><img src="${APP_PATH}/images/email.png" alt="" id="image1" /></a>
@@ -43,18 +41,14 @@
         <div id="bmenu">
             <div class="bmenu">
                 <li>
-<%--                    <section>--%>
-<%--                        <h4>Recherche sur le site:</h4>--%>
-<%--                        <input type="search" id="site-search" name="search1" placeholder="Rechercher sur le site…">--%>
-<%--                    </section>--%>
                 </li>
                 <li>
                     <section>
                         <h4>Historique des missions:</h4>
                         <form method="POST" action="${APP_PATH}/data/doGetMission.do">
-                            <select name="missionId" size="1">
-                                <c:forEach items="${sessionScope.missionNames}" var="mission" varStatus="i">
-                                    <option id="<${i.count}" value="${i.count}">${mission}</option>
+                            <select name="missionName" size="1">
+                                <c:forEach items="${sessionScope.missionNames}" var="mission">
+                                    <option id="<${mission}" value="${mission}">${mission}</option>
                                 </c:forEach>
                                 <br/>
                             </select><br>
@@ -63,29 +57,8 @@
                             <input type="submit" value="Rchercher">
                         </form>
 
-<%--                        <p>Choix des données:</p>--%>
-<%--                        <div>--%>
-<%--                            <input type="checkbox" id="profil1" name="profil1"><label id="graph" class="graph_profil">Profil de température</label>--%>
-<%--                            <input type="checkbox" id="profil2" name="profil2"><label id="graph" class="graph_profil">Profil de salinité</label>--%>
-<%--                            <input type="checkbox" id="profil3" name="profil3"><label id="graph" class="graph_profil">Série temporelles</label>--%>
-<%--                            <input type="checkbox" id="profil4" name="profil4"><label id="graph" class="graph_profil">Carte</label>--%>
-<%--                        </div>--%>
                     </section>
                 </li>
-
-<%--                <li>--%>
-<%--                    <section>--%>
-<%--                        <h4> Visualiser carte des trajets:</h4>--%>
-<%--                        <button id="button3" >Afficher</button>--%>
-<%--                    </section>--%>
-<%--                </li>--%>
-
-<%--                <li>--%>
-<%--                    <section>--%>
-<%--                        <p> </p>--%>
-<%--                    </section>--%>
-<%--                </li>--%>
-
             </div>
         </div>
 
