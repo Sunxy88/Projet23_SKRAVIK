@@ -27,11 +27,11 @@ public class DataController {
      * Data will be combined in desired way (it is up to if the salinity box or air temperature box is checked).
      * @param missionName the mission that user want to check
      * @param airTemp indicates if air temperature checkbox is checked
-     * @param salinity indicates if salinity checkbox is checked
+     * @param velocity indicates if velocity checkbox is checked
      * @return
      */
     @RequestMapping(value = "/doGetMission", method = RequestMethod.POST)
-    public ModelAndView doGetMission(String missionName, Boolean airTemp, Boolean salinity) {
+    public ModelAndView doGetMission(String missionName, Boolean airTemp, Boolean velocity, Boolean pression) {
         ModelAndView response = new ModelAndView();
         List<Data> datas = null;
         response.setViewName("index");
@@ -42,7 +42,7 @@ public class DataController {
             e.printStackTrace();
         }
 
-        fillCoordinate(response, datas, airTemp != null, salinity != null);
+        fillCoordinate(response, datas, airTemp != null, velocity != null, pression != null);
 
         return response;
     }
@@ -52,15 +52,16 @@ public class DataController {
      * @param response
      * @param datas
      * @param airTemp
-     * @param isSalinity
+     * @param isVelocity
      */
-    private void fillCoordinate(ModelAndView response, List<Data> datas, boolean airTemp, boolean isSalinity) {
+    private void fillCoordinate(ModelAndView response, List<Data> datas, boolean airTemp, boolean isVelocity, boolean isPression) {
         if (datas != null) {
             List<Double> latitudes = new ArrayList<>();
             List<Double> longitudes = new ArrayList<>();
             List<String> dates = new ArrayList<>();
             List<Double> airTemperatures = new ArrayList<>();
-            List<Double> salinity = new ArrayList<>();
+            List<Double> velocity = new ArrayList<>();
+            List<Double> pressure = new ArrayList<>();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             for (Data data : datas) {
                 Double longitude, latitude;
@@ -73,8 +74,11 @@ public class DataController {
                 if (airTemp) {
                     airTemperatures.add(data.getAirtemperature());
                 }
-                if (isSalinity) {
-                    salinity.add(data.getSalinity());
+                if (isVelocity) {
+                    velocity.add(data.getVelocity());
+                }
+                if (isPression) {
+                    pressure.add(data.getAtmpressure());
                 }
             }
             System.out.println(datas.get(0).getDate());
@@ -85,8 +89,11 @@ public class DataController {
             if (airTemp) {
                 map.put("aitTemperatures", airTemperatures);
             }
-            if (isSalinity) {
-                map.put("salinity", salinity);
+            if (isVelocity) {
+                map.put("velocity", velocity);
+            }
+            if (isPression) {
+                map.put("pressure", pressure);
             }
             response.addAllObjects(map);
         }

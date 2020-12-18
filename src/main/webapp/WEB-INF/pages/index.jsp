@@ -52,8 +52,9 @@
                                 </c:forEach>
                                 <br/>
                             </select><br>
-                            <input type="checkbox" id="airTemp" name="airTemp" value="true" checked="checked"><label id="graph" class="graph_profil">Profil de température</label>
-                            <input type="checkbox" id="salinity" name="salinity" value="true" checked="checked"><label id="graph" class="graph_profil">Profil de salinité</label>
+                            <input type="checkbox" id="airTemp" name="airTemp" value="true"><label id="graph" class="graph_profil">Profil de température</label>
+                            <input type="checkbox" id="velocity" name="velocity" value="true"><label id="graph" class="graph_profil">Profil de velocité</label>
+                            <input type="checkbox" id="pression" name="pression" value="true"><label id="graph" class="graph_profil">Profil de pression</label>
                             <input type="submit" value="Rchercher">
                         </form>
 
@@ -65,7 +66,7 @@
         <div id="corps">
             <div id="graph_map">
                 <div id="graphdiv">
-                    <canvas id="airTempGraph" width="33vw" height="20vh"></canvas>
+                    <canvas id="airTempGraph" width="33vw" height="17vh"></canvas>
                     <script type="text/javascript">
                         var air_temp = ${aitTemperatures}
                         var dates = ${dates}
@@ -82,7 +83,7 @@
                             type: 'scatter',
                             data: {
                                 datasets: [{
-                                    label: 'Scatter Dataset',
+                                    label: 'Air temperature',
                                     data: dataforchart
                                 }]
                             },
@@ -112,9 +113,9 @@
                             }
                         });
                     </script>
-                    <canvas id="salinityGraph" width="33vw" height="20vh"></canvas>
+                    <canvas id="velocityGraph" width="33vw" height="15vh"></canvas>
                     <script type="text/javascript">
-                        var salinity = ${salinity}
+                        var salinity = ${velocity}
                         var dates = ${dates}
                         var dataforchart = []
                         for(let i = 0; i < dates.length; i++){
@@ -124,12 +125,12 @@
                                 y: salinity[i]
                             }
                         }
-                        var ctx = document.getElementById('salinityGraph').getContext('2d');
+                        var ctx = document.getElementById('velocityGraph').getContext('2d');
                         var scatterChart = new Chart(ctx, {
                             type: 'scatter',
                             data: {
                                 datasets: [{
-                                    label: 'Scatter Dataset',
+                                    label: 'Velocity',
                                     data: dataforchart
                                 }]
                             },
@@ -153,7 +154,55 @@
                                     yAxes: [{
                                         scaleLabel: {
                                             display: true,
-                                            labelString: 'Salinity'
+                                            labelString: 'Velocity'
+                                        }
+                                    }]
+                                },
+                            }
+                        });
+                    </script>
+                    <canvas id="pressionGraph" width="33vw" height="15vh"></canvas>
+                    <script type="text/javascript">
+                        var pression = ${pressure}
+                        var dates = ${dates}
+                        var dataforchart = []
+                        for(let i = 0; i < dates.length; i++){
+                            dataforchart[i] = {
+                                x: moment(dates[i]),
+                                // x: dates[i],
+                                y: pression[i]
+                            }
+                        }
+                        var ctx = document.getElementById('pressionGraph').getContext('2d');
+                        var scatterChart = new Chart(ctx, {
+                            type: 'scatter',
+                            data: {
+                                datasets: [{
+                                    label: 'Pressure',
+                                    data: dataforchart
+                                }]
+                            },
+                            options: {
+                                title: {
+                                    text: 'Chart.js Time Scale'
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        type: 'time',
+                                        time : {
+                                            parser : 'YYYY-MM-DD HH:mm:ss',
+                                            //     tooltip: 'YYYY-MM-DD HH:mm:ss'
+                                        },
+                                        position: 'bottom',
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Date'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Atmosphere Pressure'
                                         }
                                     }]
                                 },
@@ -182,12 +231,12 @@
                 </div>
             </div>
 
-    </div>
-    <div class="footer">
-        <h2> partenaires </h2>
-    </div>
+        </div>
+<%--        <div class="footer">--%>
+<%--            <h2> partenaires </h2>--%>
+<%--        </div>--%>
 
-</div>
+    </div>
 </div>
 </body>
 </html>
