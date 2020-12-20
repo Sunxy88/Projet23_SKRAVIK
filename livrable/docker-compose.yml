@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mysql:
+    build: ./mysql_image
+    image: mysql-ssm:mysql
+    container_name: mysql-ssm
+    restart: always
+    ports: 
+      - "3301:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: "12345678"
+      MYSQL_DATABASE: "skravik"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "12345678"
+
+  tomcat:
+    build: ./tomcat_image
+    image: tomcat-ssm
+    container_name: tomcat-ssm
+    restart: always
+    links:
+      - "mysql:db01"
+    depends_on:
+      - mysql
+    ports: 
+      - "8888:8080"
